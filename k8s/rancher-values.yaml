@@ -1,0 +1,23 @@
+bootstrapPassword: admin
+hostname: ranch.bitforger.dev
+ingress:
+  includeDefaultExtraAnnotations: false
+  ingressClassName: traefik
+  annotations:
+    cert-manager.io/issuer: main-issuer
+    cert-manager.io/issuer-kind: ClusterIssuer
+  tls:
+    source: letsEncrypt
+    class: traefik
+letsEncrypt:
+  email: email@email.com
+rancherImageTag: v2.10.2-arm64
+
+startupProbe:
+  timeoutSeconds: 280
+
+livenessProbe:
+  timeoutSeconds: 280
+
+readinessProbe:
+    timeoutSeconds: 280

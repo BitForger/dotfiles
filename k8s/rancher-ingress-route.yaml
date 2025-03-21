@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rancher-dashboard
+  namespace: cattle-system
+spec:
+  routes:
+    - kind: Rule
+      match: Host('ranch.bitforger.dev')
+  entryPoints:
+    - rancher

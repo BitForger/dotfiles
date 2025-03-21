@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: bitforger-dev-cert
+  namespace: traefik
+spec:
+  secretName: bitforger-dev-tls
+  issuerRef:
+    name: main-issuer
+    kind: ClusterIssuer
+  commonName: "*.bitforger.dev"
+  dnsNames:
+    - "bitforger.dev"
+    - "*.bitforger.dev"

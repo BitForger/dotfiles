@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage
+  namespace: homepage
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  bookmarks.yaml: |
+    - Developer:
+      - Github:
+          - abbr: GH
+            href: https://github.com/
+    - Utilities:
+        - Johnston County Public Works:
+            - abbr: JCUtil
+              href: https://www.johnstonnc.com/ut2/content.cfm?page_desc=paywaterbills
+  custom.css: ""
+  custom.js: ""
+  docker.yaml: ""
+  kubernetes.yaml: |
+    mode: cluster
+  services.yaml: |
+    - Core Infrastructure:
+      - DNS:
+          icon: adguard-home.svg
+          href: https://dns.bitforger.dev
+          description: AdGuard Home DNS
+          widget:
+            type: adguard
+            url: https://dns.bitforger.dev
+            username: domain_master
+            password: {{ op://HomeLab Secrets/Homepage Config Secrets/AdGuard DNS Password }}
+      - Unifi Network Controller:
+          icon: unifi.svg
+          href: https://192.168.25.1/network/default/dashboard
+          description: Network Dashboard
+          widget:
+            type: unifi
+            url: https://192.168.25.1
+            username: homepage
+            password: {{ op://HomeLab Secrets/Homepage Config Secrets/Unifi Console Password }}
+      - NextDNS:
+          icon: nextdns.svg
+          href: https://my.nextdns.io
+          description: Upstream DNS/mobile DNS
+          widget:
+            type: nextdns
+            profile: {{ op://HomeLab Secrets/Homepage Config Secrets/NextDNS Profile }}
+            key: {{ op://HomeLab Secrets/Homepage Config Secrets/NextDNS Key }}
+      - Rancher:
+          icon: rancher.svg
+          href: https://ranch.bitforger.dev
+          description: Rancher control panel
+      - Synology:
+          icon: synology.svg
+          href: https://thearchive.bitforger.dev
+          description: NAS
+    - Services:
+        - Mealie:
+            icon: mealie.svg
+            href: https://recipes.bitforger.dev
+            description: Recipe manager
+            widget:
+              type: mealie
+              version: 2
+              url: https://recipes.bitforger.dev
+              key: {{ op://HomeLab Secrets/Homepage Config Secrets/Mealie Password }}
+
+  settings.yaml: |
+    background:
+      image: https://images.unsplash.com/photo-1519051990279-4071d755e440
+      blur: sm
+      saturate: 50
+      brightness: 50
+      opacity: 50 # 0-100
+    title: Homepage
+    theme: dark
+    headerStyle: clean
+    layout:
+      Core Infrastructure:
+        style: row
+        columns: 3
+    disableCollapse: true
+    useEqualHeights: true
+    providers:
+      longhorn:
+        url: https://longhorn.bitforger.dev
+  widgets.yaml: |
+    - unifi_console:
+      url: https://192.168.25.1
+      username: homepage
+      password: {{ op://HomeLab Secrets/Homepage Config Secrets/Unifi Console Password }}
+      site: Home
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "cluster"
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+    - longhorn:
+        expanded: true
+        total: true
+        labels: true
+        nodes: true
+    - datetime:
+        text_size: xl
+        format:
+          timeStyle: short
