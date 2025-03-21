@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
-              value: "homepage.bitforger.dev"
+              value: "home.bitforger.dev"
           ports:
             - name: http
               containerPort: 3000
