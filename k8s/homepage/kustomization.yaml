@@ -4,6 +4,7 @@ metadata:
   name: homepage
   namespace: homepage
 resources:
+  - base/namespace.yaml
   - base/deployment.yaml
   - base/cluster-role.yaml
   - base/configmap.yaml
