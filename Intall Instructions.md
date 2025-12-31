@@ -13,25 +13,16 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.28.15+k3s1" K3S_TOKEN="<t
 Install Cert Manager
 ```sh
 helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
+  --version v1.19.2 \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.13.2 \
-  --set installCRDs=true
+  --set crds.enabled=true
 ```
 
 Install MetalLB
 ```sh
-helm repo add metallb https://metallb.github.io/metallb
-helm install \
-  metallb metallb/metallb \
-  --namespace metallb \
-  --create-namespace
-```
-
-Patch Metallb NS
-```sh
-kubectl label namespaces metallb-system pod-security.kubernetes.io/enforce=privileged pod-security.kubernetes.io/audit=privileged pod-security.kubernetes.io/warn=privileged
+kustomize build ./k8s/metallb | kubectl apply -f -
 ```
 
 Install Rancher
