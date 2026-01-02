@@ -83,9 +83,9 @@ data:
         columns: 3
     disableCollapse: true
     useEqualHeights: true
-    providers:
-      longhorn:
-        url: https://longhorn.bitforger.dev
+#    providers:
+#      longhorn:
+#        url: https://longhorn.bitforger.dev
   widgets.yaml: |
     - unifi_console:
       url: https://192.168.25.1
