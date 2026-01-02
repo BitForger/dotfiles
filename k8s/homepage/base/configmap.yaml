@@ -20,6 +20,8 @@ data:
   docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
+    ingress: true
+    traefik: true
   services.yaml: |
     - Core Infrastructure:
       - DNS:
@@ -87,11 +89,6 @@ data:
 #      longhorn:
 #        url: https://longhorn.bitforger.dev
   widgets.yaml: |
-    - unifi_console:
-      url: https://192.168.25.1
-      username: homepage
-      password: {{ op://HomeLab Secrets/Homepage Config Secrets/Unifi Console Password }}
-      site: Home
     - kubernetes:
         cluster:
           show: true
