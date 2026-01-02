@@ -9,6 +9,7 @@ metadata:
     cert-manager.io/issuer: main-issuer
     cert-manager.io/issuer-kind: ClusterIssuer
 spec:
+  ingressClassName: traefik-external
   rules:
     - host: "home.bitforger.dev"
       http:

@@ -6,14 +6,6 @@ additionalArguments:
   - "--serversTransport.insecureSkipVerify=true"
   - "--log.level=INFO"
 
-deployment:
-  enabled: true
-  replicas: 1
-  annotations: {}
-  podAnnotations: {}
-  additionalContainers: []
-  initContainers: []
-
 ports:
   web:
     redirections:
@@ -22,11 +14,19 @@ ports:
         scheme: https
         permanent: true
   websecure:
-    tls: {}
+    tls:
+      enabled: true
+      secretName: bitforger-dev-tls
 
 ingressRoute:
   dashboard:
     enabled: true
+    matchRule: Host(`traefik.bitforger.dev`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+
+ingressClass:
+  enabled: true
+  isDefaultClass: false
+  name: traefik-external
 
 providers:
   kubernetesCRD:

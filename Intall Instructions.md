@@ -1,5 +1,4 @@
 
-
 Install K3S
 ```sh
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.28.15+k3s1" INSTALL_K3S_EXEC="server" sh -s - --disable=traefik --disable=servicelb --node-taint 'node-role.kubernetes.io/master=true:NoSchedule'
@@ -23,6 +22,16 @@ helm install \
 Install MetalLB
 ```sh
 kustomize build ./k8s/metallb | kubectl apply -f -
+```
+
+Install Traefik
+
+```sh
+helm upgrade -f k8s/traefik/values.yaml \
+  --install \
+  --create-namespace \
+  --namespace traefik \
+  traefik oci://ghcr.io/traefik/helm/traefik
 ```
 
 Install Rancher
