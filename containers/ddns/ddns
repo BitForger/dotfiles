@@ -1,9 +1,17 @@
 #!/bin/zsh
-source ~/.zshrc
 
 DOMAIN="bitforger.dev"
-RECORD_NAME=""
 RECORD_ID=""  # Get from DO API
+
+if [[ -z "$DO_TOKEN" ]]; then
+  echo "Error: DO_TOKEN environment variable is not set."
+  exit 1
+fi
+
+if [[ -z "$RECORD_ID" ]]; then
+  echo "Error: RECORD_ID environment variable is not set. Please set it to the ID of your DNS record."
+  exit 1
+fi
 
 echo "Getting current public IP address..."
 # Get current public IP from UniFi controller

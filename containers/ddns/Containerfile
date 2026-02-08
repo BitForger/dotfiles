@@ -1,0 +1,13 @@
+FROM alpine:latest
+LABEL authors="bitforger"
+
+RUN apk update && apk upgrade \
+    && apk add --no-cache zsh curl jq
+
+WORKDIR /app
+
+COPY ./ddns ./
+
+RUN chmod +x ddns
+
+CMD ["/app/ddns"]
