@@ -1,0 +1,31 @@
+#!/bin/zsh
+source ~/.zshrc
+
+DOMAIN="bitforger.dev"
+RECORD_NAME=""
+RECORD_ID=""  # Get from DO API
+
+echo "Getting current public IP address..."
+# Get current public IP from UniFi controller
+CURRENT_IP=$(curl -s "https://api.ipify.org")
+
+echo "Current public IP: $CURRENT_IP"
+sleep 1
+
+echo "Getting current DNS record from DigitalOcean..."
+# Get current DNS record from DO
+DO_IP=$(curl -s -H "Authorization: Bearer ${DO_TOKEN}" \
+  "https://api.digitalocean.com/v2/domains/$DOMAIN/records/$RECORD_ID" | jq -r '.domain_record.data')
+
+echo "Current DNS record IP: $DO_IP"
+
+echo "Checking if update is needed..."
+# Update if IP changed
+if [[ "$CURRENT_IP" != "$DO_IP" ]]; then
+  echo "IP has changed. Updating DNS record..."
+  curl -X PUT \
+    -H "Authorization: Bearer ${DO_TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d "{\"data\":\"$CURRENT_IP\", \"ttl\":3600}" \
+    "https://api.digitalocean.com/v2/domains/$DOMAIN/records/$RECORD_ID"
+fi
