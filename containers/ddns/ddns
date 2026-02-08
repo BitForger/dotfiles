@@ -1,13 +1,19 @@
 #!/bin/zsh
 
-DOMAIN="bitforger.dev"
-RECORD_ID=""  # Get from DO API
+if [[ -z "$DOMAIN" ]]; then
+  echo "Error: DOMAIN environment variable is not set. Please set it to your domain name (e.g., example.com)."
+  exit 1
+fi
 
 if [[ -z "$DO_TOKEN" ]]; then
   echo "Error: DO_TOKEN environment variable is not set."
   exit 1
 fi
 
+# Check if RECORD_ID is set
+# This should be the ID of the DNS record you want to update (e.g., the A record for your domain).
+# You can find this ID by listing your DNS records via the DigitalOcean API
+# or doctl compute domain records list <domain>
 if [[ -z "$RECORD_ID" ]]; then
   echo "Error: RECORD_ID environment variable is not set. Please set it to the ID of your DNS record."
   exit 1
