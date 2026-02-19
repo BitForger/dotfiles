@@ -11,4 +11,4 @@ resources:
   - cert-manager/clusterIssuer.yaml
   - cert-manager/digital-ocean-secret.yaml
   - wildcard-cert.yaml
-  - ddns/kustomization.yaml
+  - ddns/
