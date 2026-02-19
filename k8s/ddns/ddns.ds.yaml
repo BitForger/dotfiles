@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ddns
+spec:
+  schedule: "*/5 * * * *"
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 3
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: ddns
+              image: ghcr.io/bitforger/do-dns:latest
+              env:
+                - name: DO_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: digitalocean-secret
+                      key: access-token
+                - name: DOMAIN
+                  value: "bitforger.dev"
+                - name: RECORD_ID
+                  value: "1807538591"
