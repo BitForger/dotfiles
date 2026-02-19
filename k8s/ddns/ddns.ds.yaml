@@ -14,7 +14,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: ddns
-              image: ghcr.io/bitforger/do-dns:latest
+              image: ghcr.io/bitforger/do-ddns:latest
               env:
                 - name: DO_TOKEN
                   valueFrom:
