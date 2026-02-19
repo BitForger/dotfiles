@@ -24,11 +24,11 @@ env:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os:
-          - macOS-latest
-          - ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     os:
+    #       - macOS-latest
+    #       - ubuntu-latest
     runs-on: ubuntu-latest
     permissions:
       contents: read
