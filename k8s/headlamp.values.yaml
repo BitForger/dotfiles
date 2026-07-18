@@ -1,0 +1,32 @@
+config:
+  watchPlugins: true
+pluginsManager:
+  enabled: true
+  configContent: |
+    plugins: []
+    installOptions:
+      parallel: true
+      maxConcurrent: 2
+  baseImage: node:lts-alpine
+  version: latest
+
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  hosts:
+    - host: headlamp.bitforger.dev
+      paths:
+        - path: /
+          type: Prefix
+  tls:
+    - secretName: headlamp-tls
+      hosts:
+        - headlamp.bitforger.dev
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # Optional: Force SSL redirect if not handled globally by Traefik
+    # traefik.ingress.kubernetes.io/router.tls: "true"
+
+service:
+  type: ClusterIP
