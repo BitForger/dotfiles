@@ -34,8 +34,7 @@ helm upgrade -f k8s/traefik/values.yaml \
   traefik oci://ghcr.io/traefik/helm/traefik
 ```
 
-Install Rancher
+Install Headlamp
 ```sh
-helm upgrade --install --wait --create-namespace -n cattle-system rancher rancher-latest/rancher \
-  --values ./k8s/rancher-values.yaml
+helm upgrade --install --wait --create-namespace -n headlamp headlamp headlamp/headlamp -f k8s/headlamp.values.yaml
 ```

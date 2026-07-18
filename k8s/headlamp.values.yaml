@@ -23,7 +23,7 @@ ingress:
       hosts:
         - headlamp.bitforger.dev
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "main-issuer"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     # Optional: Force SSL redirect if not handled globally by Traefik
     # traefik.ingress.kubernetes.io/router.tls: "true"
