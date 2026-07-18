@@ -12,7 +12,7 @@ pluginsManager:
 
 ingress:
   enabled: true
-  ingressClassName: traefik
+  ingressClassName: traefik-external
   hosts:
     - host: headlamp.bitforger.dev
       paths:
@@ -23,8 +23,8 @@ ingress:
       hosts:
         - headlamp.bitforger.dev
   annotations:
-    cert-manager.io/cluster-issuer: "main-issuer"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/issuer: main-issuer
+    cert-manager.io/issuer-kind: ClusterIssuer
     # Optional: Force SSL redirect if not handled globally by Traefik
     # traefik.ingress.kubernetes.io/router.tls: "true"
 

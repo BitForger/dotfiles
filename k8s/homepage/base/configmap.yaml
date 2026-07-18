@@ -50,24 +50,24 @@ data:
             type: nextdns
             profile: {{ op://HomeLab Secrets/Homepage Config Secrets/NextDNS Profile }}
             key: {{ op://HomeLab Secrets/Homepage Config Secrets/NextDNS Key }}
-      - Rancher:
-          icon: rancher.svg
-          href: https://ranch.bitforger.dev
-          description: Rancher control panel
+      - Headlamp:
+          icon: headlamp.svg
+          href: https://headlamp.bitforger.dev
+          description: Headlamp control panel
       - Synology:
           icon: synology.svg
           href: https://thearchive.bitforger.dev
           description: NAS
-#    - Services:
-#        - Mealie:
-#            icon: mealie.svg
-#            href: https://recipes.bitforger.dev
-#            description: Recipe manager
-#            widget:
-#              type: mealie
-#              version: 2
-#              url: https://recipes.bitforger.dev
-#              key: {{ op://HomeLab Secrets/Homepage Config Secrets/Mealie Password }}
+  #    - Services:
+  #        - Mealie:
+  #            icon: mealie.svg
+  #            href: https://recipes.bitforger.dev
+  #            description: Recipe manager
+  #            widget:
+  #              type: mealie
+  #              version: 2
+  #              url: https://recipes.bitforger.dev
+  #              key: {{ op://HomeLab Secrets/Homepage Config Secrets/Mealie Password }}
 
   settings.yaml: |
     background:
@@ -85,9 +85,9 @@ data:
         columns: 3
     disableCollapse: true
     useEqualHeights: true
-#    providers:
-#      longhorn:
-#        url: https://longhorn.bitforger.dev
+  #    providers:
+  #      longhorn:
+  #        url: https://longhorn.bitforger.dev
   widgets.yaml: |
     - kubernetes:
         cluster:
