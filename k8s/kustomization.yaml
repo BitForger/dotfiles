@@ -11,4 +11,5 @@ resources:
   - cert-manager/clusterIssuer.yaml
   - cert-manager/digital-ocean-secret.yaml
   - wildcard-cert.yaml
+  - github-regsitry.secret.yaml
   - ddns/
