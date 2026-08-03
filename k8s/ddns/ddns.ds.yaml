@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: ddns
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "0 * * * *"
   failedJobsHistoryLimit: 3
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Replace

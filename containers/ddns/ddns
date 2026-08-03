@@ -31,20 +31,18 @@ echo "Getting current DNS record from DigitalOcean..."
 DO_RESPONSE=$(curl -s -H "Authorization: Bearer ${DO_TOKEN}" \
   "https://api.digitalocean.com/v2/domains/$DOMAIN/records/$RECORD_ID")
 
-DO_IP=$(echo "$DO_RESPONSE" | jq -r '.domain_record.data')
+DO_IP=$(echo "$DO_RESPONSE" | jq -r '.domain_record.data // empty')
 
 if [[ -z "$DO_IP" ]]; then
-  echo "Error: Failed to retrieve current DNS record from DigitalOcean."
-  echo "Response from DigitalOcean: $DO_RESPONSE"
-  exit 1
+  echo "No existing DNS record IP found in DigitalOcean. Proceeding with update..."
+else
+  echo "Current DNS record IP: $DO_IP"
 fi
 
-echo "Current DNS record IP: $DO_IP"
-
 echo "Checking if update is needed..."
-# Update if IP changed
-if [[ "$CURRENT_IP" != "$DO_IP" ]]; then
-  echo "IP has changed. Updating DNS record..."
+# Update if IP changed or if there was no existing record IP
+if [[ -z "$DO_IP" || "$CURRENT_IP" != "$DO_IP" ]]; then
+  echo "IP has changed or no existing record IP was found. Updating DNS record..."
   curl -X PUT \
     -H "Authorization: Bearer ${DO_TOKEN}" \
     -H "Content-Type: application/json" \
