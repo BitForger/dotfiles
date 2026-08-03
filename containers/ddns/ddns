@@ -28,8 +28,16 @@ sleep 1
 
 echo "Getting current DNS record from DigitalOcean..."
 # Get current DNS record from DO
-DO_IP=$(curl -s -H "Authorization: Bearer ${DO_TOKEN}" \
-  "https://api.digitalocean.com/v2/domains/$DOMAIN/records/$RECORD_ID" | jq -r '.domain_record.data')
+DO_RESPONSE=$(curl -s -H "Authorization: Bearer ${DO_TOKEN}" \
+  "https://api.digitalocean.com/v2/domains/$DOMAIN/records/$RECORD_ID")
+
+DO_IP=$(echo "$DO_RESPONSE" | jq -r '.domain_record.data')
+
+if [[ -z "$DO_IP" ]]; then
+  echo "Error: Failed to retrieve current DNS record from DigitalOcean."
+  echo "Response from DigitalOcean: $DO_RESPONSE"
+  exit 1
+fi
 
 echo "Current DNS record IP: $DO_IP"
 
