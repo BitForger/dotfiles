@@ -11,12 +11,14 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.34.2+k3s1" K3S_TOKEN="K10
 
 Install Cert Manager
 ```sh
-helm install \
+helm upgrade \
+  --install \
+  --wait \
   cert-manager oci://quay.io/jetstack/charts/cert-manager \
-  --version v1.19.2 \
+  --version v1.21.1 \
   --namespace cert-manager \
   --create-namespace \
-  --set crds.enabled=true
+  -f cert-manager.values.yaml
 ```
 
 Install MetalLB
