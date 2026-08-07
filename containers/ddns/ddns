@@ -39,7 +39,7 @@ else
   echo "Current DNS record IP: $DO_IP"
 fi
 
-echo "Checking if update is needed..."
+echo "Checking if update is needed... "
 # Update if IP changed or if there was no existing record IP
 if [[ -z "$DO_IP" || "$CURRENT_IP" != "$DO_IP" ]]; then
   echo "IP has changed or no existing record IP was found. Updating DNS record..."
@@ -48,4 +48,6 @@ if [[ -z "$DO_IP" || "$CURRENT_IP" != "$DO_IP" ]]; then
     -H "Content-Type: application/json" \
     -d "{\"data\":\"$CURRENT_IP\", \"ttl\":3600}" \
     "https://api.digitalocean.com/v2/domains/$DOMAIN/records/$RECORD_ID"
+else
+  echo "IP has not changed. No update needed."
 fi
