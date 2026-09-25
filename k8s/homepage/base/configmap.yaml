@@ -58,6 +58,10 @@ data:
           icon: synology.svg
           href: https://thearchive.bitforger.dev
           description: NAS
+      - Home Assistant:
+          icon: home-assistant.svg
+          href: https://homeassistant.bitforger.dev
+          description: Home automation dashboard
   #    - Services:
   #        - Mealie:
   #            icon: mealie.svg
